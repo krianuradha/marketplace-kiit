@@ -5,7 +5,10 @@ A modern, full-stack marketplace application built specifically for university h
 ## 🚀 Key Features
 
 - **Secure Authentication:** Integrated dual-auth system supporting both email/password (custom JWT implementation) and Google OAuth (NextAuth).
-- **Segmented Marketplaces:** Dedicated, gender-specific marketplace sections to ensure privacy and community relevance.
+- **Gender-Specific Marketplaces (Hostel Segregation):** The platform strictly segments users based on their hostel type to ensure privacy and comfort.
+  - **Queen's Castle:** Exclusive marketplace for the girls' hostel.
+  - **King Palace:** Exclusive marketplace for the boys' hostel.
+  *Note: Users can only view, list, and interact with products and sellers within their designated section.*
 - **Product Management:** Complete CRUD functionality for product listings, including categorization, pricing, and condition details.
 - **Communication:** Built-in messaging system enabling direct communication between buyers and sellers without leaving the platform.
 - **Trust & Safety:** Comprehensive seller profile system with ratings and reviews to build community trust.
