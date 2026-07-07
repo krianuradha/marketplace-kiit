@@ -26,6 +26,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Google OAuth users have no password
+    if (!user[0].passwordHash) {
+      return NextResponse.json(
+        { error: 'This account uses Google sign-in. Please use the Google button.' },
+        { status: 401 }
+      );
+    }
+
     // Verify password
     const passwordMatch = await bcryptjs.compare(
       validatedData.password,

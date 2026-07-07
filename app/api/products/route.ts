@@ -3,7 +3,7 @@ import { db, products, users } from '@/lib/db';
 import { createProductSchema } from '@/lib/validators';
 import { verifyToken } from '@/lib/auth';
 import { cookies } from 'next/headers';
-import { eq, and, or } from 'drizzle-orm';
+import { eq, and, desc } from 'drizzle-orm';
 
 // GET - List products with filters
 export async function GET(request: NextRequest) {
@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
     const section = searchParams.get('section');
     const category = searchParams.get('category');
     const sold = searchParams.get('sold');
+    const sellerId = searchParams.get('sellerId');
 
     let query = db.select({
       id: products.id,
@@ -36,6 +37,10 @@ export async function GET(request: NextRequest) {
     // Apply filters
     const filters = [];
 
+    if (sellerId) {
+      filters.push(eq(products.userId, sellerId));
+    }
+
     if (section) {
       filters.push(eq(products.section, section as any));
     }
@@ -52,7 +57,7 @@ export async function GET(request: NextRequest) {
       query = query.where(and(...filters));
     }
 
-    const result = await query.orderBy(products.createdAt);
+    const result = await query.orderBy(desc(products.createdAt));
 
     return NextResponse.json({ products: result }, { status: 200 });
   } catch (error) {

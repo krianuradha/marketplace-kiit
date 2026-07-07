@@ -125,7 +125,7 @@ export default function SellerPage() {
                           )}
                           <CardContent className="pt-4">
                             <h3 className="font-semibold line-clamp-2">{product.title}</h3>
-                            <p className="text-primary font-bold mt-2">₹{product.price}</p>
+                            <p className="text-primary font-bold mt-2">₹{(product.price / 100).toFixed(0)}</p>
                             <p className="text-xs text-muted-foreground mt-1">{product.category}</p>
                           </CardContent>
                         </Card>
